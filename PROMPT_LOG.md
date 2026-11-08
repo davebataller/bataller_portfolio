@@ -220,6 +220,13 @@
 
 ---
 
+### Task: Fix the Vercel deployment error
+
+* Prompt used: "[Screenshot 2026-11-08 183701.png] fix all the error that is stopping to deploy in vercel" (with full Build Logs pasted on request: `Error: [STATIC_BUILD_NO_OUT_DIR] No Output Directory named "dist" found after the Build completed.`)
+* Result/Output: Diagnosed the Vercel build log — Vite built successfully (`public/build/manifest.json` generated), but Vercel looked for a `dist` output directory and failed with `[STATIC_BUILD_NO_OUT_DIR]`. Added `"outputDirectory": "public"` to `vercel.json` so the static root matches Laravel's public directory (Vite assets, images, and favicon). The two npm warnings in the log (`Unknown env config "cache-dir"`, `install-scripts`) are harmless and were left as-is. Validated `vercel.json` parses, confirmed `public/build/manifest.json` exists after `npm run build`, cleared compiled views, and verified `php artisan test` still passes (5 passed). Committed and pushed to `origin/main` for redeployment.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -268,5 +275,6 @@
 | 18 | Set profile photo | Real photo in About profile card and hero |
 | 19 | Prepare for Vercel | Serverless entry point, vercel.json, health check, deploy docs |
 | 20 | Update phone number | Real number with tap-to-call links in About and Contact |
+| 21 | Fix Vercel build error | Set `outputDirectory` to `public` so deploy proceeds |
 
-**Total tasks recorded:** 34 — 8 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 35 — 9 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
