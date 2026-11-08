@@ -192,6 +192,13 @@
 
 ---
 
+### Task: Complete the unfinished certifications work
+
+* Prompt used: "complete what's not done in certifications"
+* Result/Output: Audited the certifications implementation and finished the remaining gaps. Enriched `config/portfolio.php` with award details (`awarded_to`, `mode`, `skills`, `orientation`, `issuer_url`, and optional `credential_id` / `verify_url`). Rebuilt `partials/certifications.blade.php` to show the full certificate without cropping for both portrait and landscape images (contained image over a blurred backdrop), add View and Download actions, issuer links, skills chips, and a designed empty state, plus All / Completions / Participations filter pills with client-side filtering. Upgraded the `/dashboard` certifications panel with thumbnails, a completion/participation split, and type badges. Fixed the navigation active-highlight script in `resources/js/app.js`, which only matched raw `#` hrefs and therefore never highlighted any section, so Certifications now highlights correctly. Added `tests/Feature/CertificationsTest.php` covering titles, images, section order, and the dashboard panel. Rebuilt the assets and verified at 1440, 1024, 768, 390, and 320 pixels that all certificate images load, filters work, there is no horizontal overflow, and there are no console or page errors. Tests: 5 passed.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -236,5 +243,6 @@
 | 14 | Publish | Pending GitHub push with the developer's credentials |
 | 15 | Build certification dashboard | Three certificate images with titles, stats, and dashboard panel |
 | 16 | Publish first project | QR Code Based Event Attendance with two screenshots |
+| 17 | Complete certifications | Full-image display, details, filters, tests, navigation fix |
 
-**Total tasks recorded:** 30 — 4 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 31 — 5 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

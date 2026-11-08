@@ -88,7 +88,9 @@ return [
     | Each entry is shown in the certification dashboard and as a certificate
     | card. Drop the image inside public/images/certificates/ and point the
     | "image" key at it. "type" is used to count participation vs completion
-    | credentials, so keep it short.
+    | credentials, so keep it short. Optional keys (credential_id, verify_url,
+    | skills, mode) are shown when present; orientation is "portrait" or
+    | "landscape" and controls how the image is framed on cards.
     |
     */
 
@@ -97,37 +99,58 @@ return [
             'title' => 'Startup Now Cordillera: Exploring Programs, Funding, and Opportunities for Aspiring Startups',
             'issuer' => 'Department of Science and Technology — Cordillera Administrative Region',
             'issuer_short' => 'DOST CAR',
+            'issuer_url' => 'https://www.dost.gov.ph/',
+            'awarded_to' => 'Janray Dave T. Bataller',
             'date' => 'September 2, 2026',
             'year' => '2026',
             'type' => 'Certificate of Participation',
+            'mode' => 'Online via Zoom',
             'tags' => ['Startups', 'Funding', 'DOST'],
+            'skills' => ['Startup programs', 'Funding options', 'Startup ecosystem'],
             'description' => 'Joined DOST Cordillera’s online session on startup programs, funding options, and opportunities available to aspiring founders.',
             'image' => 'images/certificates/startup-now-cordillera-2026.jpg',
+            'orientation' => 'portrait',
             'alt' => 'DOST Cordillera Certificate of Participation awarded to Janray Dave T. Bataller for Startup Now Cordillera.',
+            'credential_id' => null,
+            'verify_url' => null,
         ],
         [
             'title' => 'Understanding Startups & Getting Your Idea Ready for the Philippine Startup Challenge XI',
             'issuer' => 'Department of Information and Communications Technology — Cordillera Administrative Region',
             'issuer_short' => 'DICT CAR',
+            'issuer_url' => 'https://dict.gov.ph/',
+            'awarded_to' => 'Janray Dave T. Bataller',
             'date' => 'September 7, 2026',
             'year' => '2026',
             'type' => 'Certificate of Participation',
+            'mode' => 'Online via Zoom · 1:30–4:30 PM',
             'tags' => ['Startups', 'Pitch readiness', 'DICT'],
+            'skills' => ['Startup fundamentals', 'Idea development', 'Pitch readiness'],
             'description' => 'Completed DICT’s webinar series on startup fundamentals and preparing an idea for the Philippine Startup Challenge XI.',
             'image' => 'images/certificates/startup-challenge-xi-webinar-2026.jpg',
+            'orientation' => 'portrait',
             'alt' => 'DICT Cordillera Certificate of Participation awarded to Janray Dave T. Bataller for the Philippine Startup Challenge XI webinar series.',
+            'credential_id' => null,
+            'verify_url' => null,
         ],
         [
             'title' => 'Introduction to Modern AI',
             'issuer' => 'Cisco Networking Academy',
             'issuer_short' => 'Cisco NetAcad',
+            'issuer_url' => 'https://www.netacad.com/',
+            'awarded_to' => 'Janray Dave T. Bataller',
             'date' => 'October 22, 2026',
             'year' => '2026',
             'type' => 'Certificate of Completion',
+            'mode' => 'Online · Cisco Networking Academy',
             'tags' => ['Artificial Intelligence', 'AI Fundamentals', 'Cisco'],
+            'skills' => ['Modern AI concepts', 'AI applications', 'AI fundamentals'],
             'description' => 'Completed Cisco Networking Academy’s introductory course on modern artificial intelligence and its practical applications.',
             'image' => 'images/certificates/cisco-introduction-to-modern-ai-2026.jpg',
+            'orientation' => 'landscape',
             'alt' => 'Cisco Networking Academy Certificate of Completion for Introduction to Modern AI awarded to Janray Dave T. Bataller.',
+            'credential_id' => null,
+            'verify_url' => null,
         ],
     ],
 

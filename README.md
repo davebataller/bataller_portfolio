@@ -21,7 +21,7 @@ The application deliberately avoids a database. There are **no migrations, model
 
 - **Custom dark design system** built with Tailwind CSS 4 and hand-written CSS components.
 - **Single-page portfolio** with hero, about, education timeline, certification dashboard, projects, GitHub, and contact sections.
-- **Certification dashboard** showing earned credentials with their certificate images, titles, issuers, dates, and tags; each image opens the full-size certificate.
+- **Certification dashboard** showing earned credentials with their certificate images, titles, issuers, dates, award details, and skills; each image opens the full-size certificate and can be downloaded, with All / Completions / Participations filtering.
 - **Project showcase** featuring **A QR Code Based Event Attendance** for DCCP-Bangued (S.Y. 2025–2026) with login and admin dashboard screenshots, live-attendance details, and stack tags.
 - **Project dashboard** at `/dashboard` that summarizes project status, certifications, portfolio readiness, education, and quick links.
 - **Config-driven content** — update `config/portfolio.php` instead of editing Blade templates.
@@ -143,18 +143,25 @@ Copy the certificate image into `public/images/certificates/`, then add an array
         'title' => 'Introduction to Modern AI',
         'issuer' => 'Cisco Networking Academy',
         'issuer_short' => 'Cisco NetAcad',
+        'issuer_url' => 'https://www.netacad.com/',
+        'awarded_to' => 'Janray Dave T. Bataller',
         'date' => 'October 22, 2026',
         'year' => '2026',
         'type' => 'Certificate of Completion',
+        'mode' => 'Online · Cisco Networking Academy',
         'tags' => ['Artificial Intelligence', 'Cisco'],
+        'skills' => ['Modern AI concepts', 'AI applications'],
         'description' => 'Completed the introductory course on modern AI.',
         'image' => 'images/certificates/cisco-introduction-to-modern-ai-2026.jpg',
+        'orientation' => 'landscape',
         'alt' => 'Cisco Networking Academy Certificate of Completion for Introduction to Modern AI.',
+        'credential_id' => null,
+        'verify_url' => null,
     ],
 ],
 ```
 
-The certification dashboard statistics, cards, and the `/dashboard` certifications panel all read from this array.
+The certification dashboard statistics, cards, and the `/dashboard` certifications panel all read from this array. `orientation` (`portrait`/`landscape`) is informational — cards always show the full image without cropping using a contained image over a blurred backdrop. Optional `credential_id` and `verify_url` lines appear only when set. Use the All / Completions / Participations pills on the page to filter the cards without reloading.
 
 ### Replacing the profile image
 

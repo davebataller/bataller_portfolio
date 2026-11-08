@@ -230,13 +230,28 @@
                             </div>
                             <span class="text-xs font-semibold text-mint-200">{{ count($certifications) }}</span>
                         </div>
-                        <ul class="mt-5 space-y-4">
+                        <p class="mt-3 text-[0.68rem] text-slate-500">
+                            {{ collect($certifications)->where('type', 'Certificate of Completion')->count() }} completions ·
+                            {{ collect($certifications)->where('type', 'Certificate of Participation')->count() }} participations
+                        </p>
+                        <ul class="mt-4 space-y-4">
                             @foreach ($certifications as $certificate)
                                 <li class="flex gap-3">
-                                    <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-mint-300"></span>
-                                    <div class="min-w-0">
+                                    <a href="{{ asset($certificate['image']) }}" target="_blank" rel="noopener noreferrer"
+                                       class="h-11 w-16 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-ink-950"
+                                       aria-label="View certificate: {{ $certificate['title'] }}">
+                                        <img src="{{ asset($certificate['image']) }}" alt="{{ $certificate['alt'] }}"
+                                             loading="lazy" decoding="async"
+                                             class="h-full w-full object-cover object-top">
+                                    </a>
+                                    <div class="min-w-0 flex-1">
                                         <p class="text-xs font-medium leading-snug text-slate-200">{{ $certificate['title'] }}</p>
                                         <p class="mt-0.5 text-[0.68rem] text-slate-500">{{ $certificate['issuer_short'] }} &middot; {{ $certificate['date'] }}</p>
+                                        <span @class([
+                                            'mt-1.5 inline-flex items-center rounded-full border px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wide',
+                                            'border-mint-300/20 bg-mint-300/[0.07] text-mint-200' => $certificate['type'] === 'Certificate of Completion',
+                                            'border-sky-400/20 bg-sky-400/[0.07] text-sky-300' => $certificate['type'] !== 'Certificate of Completion',
+                                        ])>{{ $certificate['type'] === 'Certificate of Completion' ? 'Completion' : 'Participation' }}</span>
                                     </div>
                                 </li>
                             @endforeach

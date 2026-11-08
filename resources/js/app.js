@@ -84,12 +84,20 @@ ready(() => {
     }
 
     const navLinks = document.querySelectorAll('[data-nav-link]');
+    const getSectionForLink = (link) => {
+        const href = link.getAttribute('href');
+        if (!href) return null;
+        const hashIndex = href.indexOf('#');
+        if (hashIndex === -1) return null;
+        const id = href.slice(hashIndex + 1);
+        return id ? document.getElementById(id) : null;
+    };
     const sections = [...navLinks]
-        .map((link) => {
-            const target = link.getAttribute('href');
-            return target && target.startsWith('#') ? document.querySelector(target) : null;
-        })
+        .map(getSectionForLink)
         .filter(Boolean);
+    const linkBySection = new Map(
+        [...navLinks].map((link) => [getSectionForLink(link), link]).filter(([section]) => section)
+    );
 
     if ('IntersectionObserver' in window && sections.length) {
         const sectionObserver = new IntersectionObserver(
@@ -97,7 +105,7 @@ ready(() => {
                 entries.forEach((entry) => {
                     if (!entry.isIntersecting) return;
                     navLinks.forEach((link) => {
-                        const isActive = link.getAttribute('href') === `#${entry.target.id}`;
+                        const isActive = linkBySection.get(entry.target) === link;
                         if (isActive) {
                             link.setAttribute('aria-current', 'page');
                         } else {
@@ -110,6 +118,39 @@ ready(() => {
         );
 
         sections.forEach((section) => sectionObserver.observe(section));
+    }
+
+    const certFilterButtons = document.querySelectorAll('[data-cert-filter]');
+    const certCards = document.querySelectorAll('[data-cert-card]');
+    const certEmpty = document.querySelector('[data-cert-empty]');
+
+    if (certFilterButtons.length && certCards.length) {
+        const setActiveFilter = (activeButton) => {
+            certFilterButtons.forEach((button) => {
+                const isActive = button === activeButton;
+                button.setAttribute('aria-pressed', String(isActive));
+                button.classList.toggle('border-mint-300/30', isActive);
+                button.classList.toggle('bg-mint-300/10', isActive);
+                button.classList.toggle('text-mint-200', isActive);
+                button.classList.toggle('border-white/10', !isActive);
+                button.classList.toggle('bg-white/[0.03]', !isActive);
+                button.classList.toggle('text-slate-400', !isActive);
+            });
+        };
+
+        certFilterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-cert-filter');
+                let visibleCount = 0;
+                certCards.forEach((card) => {
+                    const matches = filter === 'all' || card.getAttribute('data-cert-type') === filter;
+                    card.classList.toggle('hidden', !matches);
+                    if (matches) visibleCount += 1;
+                });
+                if (certEmpty) certEmpty.classList.toggle('hidden', visibleCount > 0);
+                setActiveFilter(button);
+            });
+        });
     }
 
     const copyButtons = document.querySelectorAll('[data-copy-email]');
