@@ -4,7 +4,7 @@
 **Developer:** Janray Dave T. Bataller
 **Agent:** Big Pickle (OpenCode)
 **Repository:** <https://github.com/davebataller/bataller_portfolio>
-**Date:** August 2026
+**Date:** November 2026
 
 > Every prompt, follow-up, and agent action used to plan, build, style, debug, and document this portfolio is recorded below in the order it happened. Prompts typed by the developer are quoted exactly. Tasks labelled **agent directive** were carried out under the developer's initial instruction and are listed so the full start-to-finish build is documented. Nothing has been removed.
 
