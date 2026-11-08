@@ -17,8 +17,8 @@
         <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <x-section-heading
                 eyebrow="Projects"
-                title="A workspace in progress."
-                description="A home for the systems, experiments, and class projects I build along the way. The dashboard below keeps track of everything."
+                title="Built. Shipped. Shown."
+                description="A home for the systems, experiments, and class projects I build along the way — starting with the QR Code Based Event Attendance system. The dashboard below keeps track of everything."
             />
 
             <a data-reveal href="{{ route('dashboard') }}" class="btn-ghost shrink-0 self-start sm:self-auto">
@@ -36,9 +36,20 @@
                         <p class="text-[0.7rem] text-slate-500">A live snapshot of my project workspace</p>
                     </div>
                 </div>
-                <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
-                    <span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span>
-                    Building soon
+            @php
+                $isBuilding = $totalProjects === 0;
+            @endphp
+                <span @class([
+                    'inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide',
+                    'border-white/10 bg-white/[0.03] text-slate-400' => $isBuilding,
+                    'border-mint-300/20 bg-mint-300/[0.07] text-mint-200' => ! $isBuilding,
+                ])>
+                    <span @class([
+                        'h-1.5 w-1.5 rounded-full',
+                        'bg-amber-300' => $isBuilding,
+                        'bg-mint-300' => ! $isBuilding,
+                    ])></span>
+                    {{ $isBuilding ? 'Building soon' : $totalProjects . ' project' . ($totalProjects === 1 ? '' : 's') . ' published' }}
                 </span>
             </div>
 

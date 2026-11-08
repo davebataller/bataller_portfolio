@@ -15,7 +15,7 @@
         ['label' => 'Blade layout and design system', 'done' => true],
         ['label' => 'Portfolio content and sections', 'done' => true],
         ['label' => 'GitHub repository links', 'done' => true],
-        ['label' => 'Add first project', 'done' => false],
+        ['label' => 'Add first project', 'done' => $totalProjects > 0],
         ['label' => 'Deploy the portfolio online', 'done' => false],
     ];
     $doneCount = collect($checklist)->where('done', true)->count();
@@ -90,9 +90,17 @@
                                 <p class="text-[0.7rem] text-slate-500">{{ $totalProjects }} project{{ $totalProjects === 1 ? '' : 's' }} in the workspace</p>
                             </div>
                         </div>
-                        <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-amber-400/20 bg-amber-400/[0.07] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-amber-300">
-                            <span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span>
-                            In progress
+                        <span @class([
+                            'inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide',
+                            'border-amber-400/20 bg-amber-400/[0.07] text-amber-300' => $totalProjects === 0,
+                            'border-mint-300/20 bg-mint-300/[0.07] text-mint-200' => $totalProjects > 0,
+                        ])>
+                            <span @class([
+                                'h-1.5 w-1.5 rounded-full',
+                                'bg-amber-300' => $totalProjects === 0,
+                                'bg-mint-300' => $totalProjects > 0,
+                            ])></span>
+                            {{ $totalProjects === 0 ? 'In progress' : 'Live' }}
                         </span>
                     </div>
 
@@ -126,6 +134,12 @@
                                                 <a href="{{ $project['repo'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-medium text-mint-200 hover:underline">
                                                     Source <x-icon name="arrow-up-right" class="h-3 w-3" />
                                                 </a>
+                                            @elseif (! empty($project['images'][0]['path']))
+                                                <a href="{{ asset($project['images'][0]['path']) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-medium text-mint-200 hover:underline">
+                                                    Screenshot <x-icon name="arrow-up-right" class="h-3 w-3" />
+                                                </a>
+                                            @else
+                                                <span class="text-xs text-slate-600">—</span>
                                             @endif
                                         </td>
                                     </tr>

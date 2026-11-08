@@ -152,7 +152,27 @@ return [
     |
     */
 
-    'projects' => [],
+    'projects' => [
+        [
+            'title' => 'A QR Code Based Event Attendance',
+            'description' => 'A QR code-based event attendance system built for DCCP-Bangued (S.Y. 2025–2026). Includes a secure login page for system admins, an admin dashboard with student records and live attendance updating every 10 seconds, QR scanning for time in / time out, active event tracking such as Intramurals 2026, plus reports for registration, attendance, and event records.',
+            'stack' => ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
+            'status' => 'Completed',
+            'repo' => null,
+            'demo' => null,
+            'featured' => true,
+            'images' => [
+                [
+                    'path' => 'images/projects/qr-event-attendance-dashboard.jpg',
+                    'alt' => 'Admin dashboard of the QR Code Event Attendance System showing student records and live attendance for Intramurals 2026.',
+                ],
+                [
+                    'path' => 'images/projects/qr-event-attendance-login.jpg',
+                    'alt' => 'Login page of the DCCP-Bangued QR Code Event Attendance System.',
+                ],
+            ],
+        ],
+    ],
 
     'project_categories' => [
         'Web applications',

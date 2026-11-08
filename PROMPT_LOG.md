@@ -185,6 +185,13 @@
 
 ---
 
+### Task: Add the QR Code Based Event Attendance project with screenshots
+
+* Prompt used: "c:\Users\xlaur\Downloads\d0fe7285-7c32-4f88-9cf9-81778a6871f8.jpg c:\Users\xlaur\Downloads\343beac4-75ec-4a82-846a-7ca9129a5c79.jpg put these pictures in project with a title 'A qr code based event attendance'"
+* Result/Output: Read the two screenshots with OCR — the DCCP-Bangued login page and the admin dashboard for Intramurals 2026 with live attendance — copied them to `public/images/projects/qr-event-attendance-login.jpg` and `qr-event-attendance-dashboard.jpg`, and added the project **A QR Code Based Event Attendance** to `config/portfolio.php` with description, stack, Completed status, featured flag, and an `images` array. Updated `components/project-card.blade.php` to render a screenshot gallery at the top of the card when `images` is present (falling back to the icon header otherwise) with full-size links and a screenshots placeholder when no repo/demo link exists. The projects dashboard stats now count the published project, its badge switches from "Building soon" to a published count, and `/dashboard` marks the first project as done (readiness 83%), shows the row in the projects table, and links to the first screenshot. Rebuilt the assets and verified at 1440, 1024, 768, 390, and 320 pixels that both images load, the card shows title, status, and screenshots, there is no horizontal overflow, and there are no console or page errors.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -228,5 +235,6 @@
 | 13 | Version control | Descriptive commits on `main` |
 | 14 | Publish | Pending GitHub push with the developer's credentials |
 | 15 | Build certification dashboard | Three certificate images with titles, stats, and dashboard panel |
+| 16 | Publish first project | QR Code Based Event Attendance with two screenshots |
 
-**Total tasks recorded:** 29 — 3 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 30 — 4 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

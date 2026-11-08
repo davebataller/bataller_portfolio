@@ -22,9 +22,9 @@ The application deliberately avoids a database. There are **no migrations, model
 - **Custom dark design system** built with Tailwind CSS 4 and hand-written CSS components.
 - **Single-page portfolio** with hero, about, education timeline, certification dashboard, projects, GitHub, and contact sections.
 - **Certification dashboard** showing earned credentials with their certificate images, titles, issuers, dates, and tags; each image opens the full-size certificate.
+- **Project showcase** featuring **A QR Code Based Event Attendance** for DCCP-Bangued (S.Y. 2025–2026) with login and admin dashboard screenshots, live-attendance details, and stack tags.
 - **Project dashboard** at `/dashboard` that summarizes project status, certifications, portfolio readiness, education, and quick links.
 - **Config-driven content** — update `config/portfolio.php` instead of editing Blade templates.
-- **Empty project state** that automatically becomes a project grid when entries are added.
 - **Responsive navigation** with a mobile menu, scroll progress bar, active-section highlighting, and scroll-reveal animations.
 - **Accessibility-minded** — skip link, focus styles, reduced-motion support, semantic landmarks, and descriptive alt text.
 - **No database required** — file sessions, file cache, and the sync queue driver.
@@ -99,7 +99,7 @@ All personal content lives in **`config/portfolio.php`**:
 - `bio`, `stats`, `skills`, `learning`
 - `education`
 - `certifications` (with certificate images in `public/images/certificates/`)
-- `projects` (empty by default)
+- `projects` (with screenshots in `public/images/projects/`)
 - `github` links
 - `repo_stack`, `project_categories`
 
@@ -110,18 +110,28 @@ Add an array to the `projects` key:
 ```php
 'projects' => [
     [
-        'title' => 'Inventory Management System',
-        'description' => 'A stock tracking system for a small retail store.',
-        'stack' => ['Laravel', 'MySQL', 'Tailwind CSS'],
+        'title' => 'A QR Code Based Event Attendance',
+        'description' => 'A QR code-based event attendance system for DCCP-Bangued (S.Y. 2025–2026) with admin login, live attendance, and QR scanning.',
+        'stack' => ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
         'status' => 'Completed',
-        'repo' => 'https://github.com/davebataller/inventory-system',
+        'repo' => null,
         'demo' => null,
         'featured' => true,
+        'images' => [
+            [
+                'path' => 'images/projects/qr-event-attendance-dashboard.jpg',
+                'alt' => 'Admin dashboard of the QR Code Event Attendance System.',
+            ],
+            [
+                'path' => 'images/projects/qr-event-attendance-login.jpg',
+                'alt' => 'Login page of the QR Code Event Attendance System.',
+            ],
+        ],
     ],
 ],
 ```
 
-The projects section and the dashboard automatically switch from the empty state to a project grid/table.
+Copy screenshots into `public/images/projects/` and list them under `images`. The projects section and the dashboard automatically show the project grid/table, and project cards render the screenshots when `images` is present.
 
 ### Adding a certificate
 
@@ -168,6 +178,7 @@ app/Http/Controllers/PortfolioController.php   Page controller
 config/portfolio.php                           All portfolio content
 public/images/profile.svg                      Portrait placeholder
 public/images/certificates/                    Certificate images
+public/images/projects/                        Project screenshots
 public/favicon.svg                             Favicon
 resources/css/app.css                          Tailwind theme + design system
 resources/js/app.js                            Navigation, reveal, copy interactions
