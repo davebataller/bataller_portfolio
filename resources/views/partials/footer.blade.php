@@ -32,6 +32,7 @@
                 <ul class="mt-4 space-y-3 text-sm">
                     <li><a href="{{ route('home') }}#about" class="text-slate-400 transition hover:text-mint-200">About me</a></li>
                     <li><a href="{{ route('home') }}#education" class="text-slate-400 transition hover:text-mint-200">Education</a></li>
+                    <li><a href="{{ route('home') }}#certifications" class="text-slate-400 transition hover:text-mint-200">Certifications</a></li>
                     <li><a href="{{ route('home') }}#projects" class="text-slate-400 transition hover:text-mint-200">Projects</a></li>
                     <li><a href="{{ route('dashboard') }}" class="text-slate-400 transition hover:text-mint-200">Dashboard</a></li>
                 </ul>

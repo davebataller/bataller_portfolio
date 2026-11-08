@@ -82,6 +82,57 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Certifications
+    |--------------------------------------------------------------------------
+    |
+    | Each entry is shown in the certification dashboard and as a certificate
+    | card. Drop the image inside public/images/certificates/ and point the
+    | "image" key at it. "type" is used to count participation vs completion
+    | credentials, so keep it short.
+    |
+    */
+
+    'certifications' => [
+        [
+            'title' => 'Startup Now Cordillera: Exploring Programs, Funding, and Opportunities for Aspiring Startups',
+            'issuer' => 'Department of Science and Technology — Cordillera Administrative Region',
+            'issuer_short' => 'DOST CAR',
+            'date' => 'September 2, 2026',
+            'year' => '2026',
+            'type' => 'Certificate of Participation',
+            'tags' => ['Startups', 'Funding', 'DOST'],
+            'description' => 'Joined DOST Cordillera’s online session on startup programs, funding options, and opportunities available to aspiring founders.',
+            'image' => 'images/certificates/startup-now-cordillera-2026.jpg',
+            'alt' => 'DOST Cordillera Certificate of Participation awarded to Janray Dave T. Bataller for Startup Now Cordillera.',
+        ],
+        [
+            'title' => 'Understanding Startups & Getting Your Idea Ready for the Philippine Startup Challenge XI',
+            'issuer' => 'Department of Information and Communications Technology — Cordillera Administrative Region',
+            'issuer_short' => 'DICT CAR',
+            'date' => 'September 7, 2026',
+            'year' => '2026',
+            'type' => 'Certificate of Participation',
+            'tags' => ['Startups', 'Pitch readiness', 'DICT'],
+            'description' => 'Completed DICT’s webinar series on startup fundamentals and preparing an idea for the Philippine Startup Challenge XI.',
+            'image' => 'images/certificates/startup-challenge-xi-webinar-2026.jpg',
+            'alt' => 'DICT Cordillera Certificate of Participation awarded to Janray Dave T. Bataller for the Philippine Startup Challenge XI webinar series.',
+        ],
+        [
+            'title' => 'Introduction to Modern AI',
+            'issuer' => 'Cisco Networking Academy',
+            'issuer_short' => 'Cisco NetAcad',
+            'date' => 'October 22, 2026',
+            'year' => '2026',
+            'type' => 'Certificate of Completion',
+            'tags' => ['Artificial Intelligence', 'AI Fundamentals', 'Cisco'],
+            'description' => 'Completed Cisco Networking Academy’s introductory course on modern artificial intelligence and its practical applications.',
+            'image' => 'images/certificates/cisco-introduction-to-modern-ai-2026.jpg',
+            'alt' => 'Cisco Networking Academy Certificate of Completion for Introduction to Modern AI awarded to Janray Dave T. Bataller.',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Projects
     |--------------------------------------------------------------------------
     |

@@ -8,6 +8,7 @@
     $totalProjects = count($projects);
     $completed = collect($projects)->where('status', 'Completed')->count();
     $inProgress = collect($projects)->where('status', '!=', 'Completed')->count();
+    $certifications = config('portfolio.certifications');
 
     $checklist = [
         ['label' => 'Laravel project setup', 'done' => true],
@@ -207,6 +208,31 @@
                         </ul>
                     </div>
 
+                    <div data-reveal style="--reveal-delay: 170ms" class="rounded-3xl border border-white/10 bg-white/[0.025] p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="icon-box !h-9 !w-9 !rounded-xl"><x-icon name="award" class="h-4 w-4" /></span>
+                                <h2 class="font-display text-sm font-semibold text-white">Certifications</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-mint-200">{{ count($certifications) }}</span>
+                        </div>
+                        <ul class="mt-5 space-y-4">
+                            @foreach ($certifications as $certificate)
+                                <li class="flex gap-3">
+                                    <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-mint-300"></span>
+                                    <div class="min-w-0">
+                                        <p class="text-xs font-medium leading-snug text-slate-200">{{ $certificate['title'] }}</p>
+                                        <p class="mt-0.5 text-[0.68rem] text-slate-500">{{ $certificate['issuer_short'] }} &middot; {{ $certificate['date'] }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <a href="{{ route('home') }}#certifications" class="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-mint-200 hover:underline">
+                            View certificate dashboard
+                            <x-icon name="arrow-right" class="h-3.5 w-3.5" />
+                        </a>
+                    </div>
+
                     <div data-reveal style="--reveal-delay: 200ms" class="rounded-3xl border border-white/10 bg-white/[0.025] p-6">
                         <div class="flex items-center gap-3">
                             <span class="icon-box !h-9 !w-9 !rounded-xl"><x-icon name="link" class="h-4 w-4" /></span>
@@ -219,6 +245,10 @@
                             </a>
                             <a href="{{ config('portfolio.github.repository') }}/blob/main/PROMPT_LOG.md" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3.5 py-2.5 text-xs text-slate-300 transition hover:border-mint-300/25 hover:text-mint-200">
                                 AI prompt log
+                                <x-icon name="arrow-up-right" class="h-3.5 w-3.5 text-slate-600 transition group-hover:text-mint-200" />
+                            </a>
+                            <a href="{{ route('home') }}#certifications" class="group flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3.5 py-2.5 text-xs text-slate-300 transition hover:border-mint-300/25 hover:text-mint-200">
+                                Certifications
                                 <x-icon name="arrow-up-right" class="h-3.5 w-3.5 text-slate-600 transition group-hover:text-mint-200" />
                             </a>
                             <a href="{{ route('home') }}#contact" class="group flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3.5 py-2.5 text-xs text-slate-300 transition hover:border-mint-300/25 hover:text-mint-200">

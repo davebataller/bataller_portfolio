@@ -2,7 +2,7 @@
 
 A responsive, database-free personal portfolio for **Janray Dave T. Bataller**, a fourth-year Bachelor of Science in Information Technology student at **Data Center College of Bangued – Abra**.
 
-The site is built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, and **Vite**. It presents basic information, educational background, a project workspace with a dashboard, GitHub repository links, and contact details in a single, modern scrolling experience.
+The site is built with **Laravel 12**, **Blade**, **Tailwind CSS 4**, and **Vite**. It presents basic information, educational background, a certification dashboard, a project workspace with a dashboard, GitHub repository links, and contact details in a single, modern scrolling experience.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)
 ![Blade](https://img.shields.io/badge/Blade-Templates-FF2D20)
@@ -20,8 +20,9 @@ The application deliberately avoids a database. There are **no migrations, model
 ### Highlights
 
 - **Custom dark design system** built with Tailwind CSS 4 and hand-written CSS components.
-- **Single-page portfolio** with hero, about, education timeline, projects, GitHub, and contact sections.
-- **Project dashboard** at `/dashboard` that summarizes project status, portfolio readiness, education, and quick links.
+- **Single-page portfolio** with hero, about, education timeline, certification dashboard, projects, GitHub, and contact sections.
+- **Certification dashboard** showing earned credentials with their certificate images, titles, issuers, dates, and tags; each image opens the full-size certificate.
+- **Project dashboard** at `/dashboard` that summarizes project status, certifications, portfolio readiness, education, and quick links.
 - **Config-driven content** — update `config/portfolio.php` instead of editing Blade templates.
 - **Empty project state** that automatically becomes a project grid when entries are added.
 - **Responsive navigation** with a mobile menu, scroll progress bar, active-section highlighting, and scroll-reveal animations.
@@ -97,6 +98,7 @@ All personal content lives in **`config/portfolio.php`**:
 - `school`, `course`, `year_level`
 - `bio`, `stats`, `skills`, `learning`
 - `education`
+- `certifications` (with certificate images in `public/images/certificates/`)
 - `projects` (empty by default)
 - `github` links
 - `repo_stack`, `project_categories`
@@ -121,6 +123,29 @@ Add an array to the `projects` key:
 
 The projects section and the dashboard automatically switch from the empty state to a project grid/table.
 
+### Adding a certificate
+
+Copy the certificate image into `public/images/certificates/`, then add an array to the `certifications` key:
+
+```php
+'certifications' => [
+    [
+        'title' => 'Introduction to Modern AI',
+        'issuer' => 'Cisco Networking Academy',
+        'issuer_short' => 'Cisco NetAcad',
+        'date' => 'October 22, 2026',
+        'year' => '2026',
+        'type' => 'Certificate of Completion',
+        'tags' => ['Artificial Intelligence', 'Cisco'],
+        'description' => 'Completed the introductory course on modern AI.',
+        'image' => 'images/certificates/cisco-introduction-to-modern-ai-2026.jpg',
+        'alt' => 'Cisco Networking Academy Certificate of Completion for Introduction to Modern AI.',
+    ],
+],
+```
+
+The certification dashboard statistics, cards, and the `/dashboard` certifications panel all read from this array.
+
 ### Replacing the profile image
 
 The current portrait is a generated SVG placeholder at `public/images/profile.svg`. Replace it with a real photo and update the `src` in `resources/views/partials/hero.blade.php` (or keep the filename).
@@ -142,6 +167,7 @@ The contact number is intentionally left as `09XX XXX XXXX` because only a parti
 app/Http/Controllers/PortfolioController.php   Page controller
 config/portfolio.php                           All portfolio content
 public/images/profile.svg                      Portrait placeholder
+public/images/certificates/                    Certificate images
 public/favicon.svg                             Favicon
 resources/css/app.css                          Tailwind theme + design system
 resources/js/app.js                            Navigation, reveal, copy interactions

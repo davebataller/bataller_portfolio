@@ -2,6 +2,7 @@
     $navItems = [
         ['label' => 'About', 'href' => route('home') . '#about'],
         ['label' => 'Education', 'href' => route('home') . '#education'],
+        ['label' => 'Certifications', 'href' => route('home') . '#certifications'],
         ['label' => 'Projects', 'href' => route('home') . '#projects'],
         ['label' => 'GitHub', 'href' => route('home') . '#github'],
         ['label' => 'Contact', 'href' => route('home') . '#contact'],
@@ -21,7 +22,7 @@
             </span>
         </a>
 
-        <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        <nav class="hidden items-center gap-6 lg:flex" aria-label="Primary">
             @foreach ($navItems as $item)
                 <a href="{{ $item['href'] }}" class="nav-link" data-nav-link>{{ $item['label'] }}</a>
             @endforeach

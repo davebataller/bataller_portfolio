@@ -178,6 +178,13 @@
 
 ---
 
+### Task: Add the certification dashboard before the projects section
+
+* Prompt used: "put certification dashboard before projects then c:\Users\xlaur\Downloads\6b991b06-c863-4610-9e1e-21fba1ca0318.jpg c:\Users\xlaur\Downloads\2e752539-d378-499f-b554-40d5d0a41d32.jpg c:\Users\xlaur\Downloads\a098a77d-2473-4103-908d-472040a44437.jpg put these pictures with their title"
+* Result/Output: Read the three certificate images with OCR to recover their exact titles, issuers, and dates, copied them into `public/images/certificates/` with descriptive filenames, and added a `certifications` array to `config/portfolio.php`. Built `partials/certifications.blade.php` with a dashboard-style stat strip (credentials, completions, participations, latest year) and three certificate cards that show the image, title, issuer, type, date, tags, and description, and open the full-size certificate in a new tab. Inserted the section between Education and Projects, added Certifications links to the desktop navigation, mobile menu, and footer, and added a certifications panel plus quick link to `/dashboard`. Rebuilt the assets and verified at 1440, 1024, 768, 390, and 320 pixels that all three images load, the section sits before Projects, the navbar does not overlap, there is no horizontal overflow, and there are no console or page errors.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -212,7 +219,7 @@
 | 4 | Remove the database layer | No models, migrations, or DB drivers |
 | 5 | Build the content config | All copy in `config/portfolio.php` |
 | 6 | Build the layout and design system | Responsive dark UI |
-| 7 | Build the portfolio sections | Hero, about, education, projects, GitHub, contact |
+| 7 | Build the portfolio sections | Hero, about, education, certifications, projects, GitHub, contact |
 | 8 | Build the dashboard | `/dashboard` with stats and a readiness checklist |
 | 9 | Add interactions | Mobile menu, reveal, progress, copy |
 | 10 | Build assets | Vite production build |
@@ -220,5 +227,6 @@
 | 12 | Document | README, prompt log, Word reports |
 | 13 | Version control | Descriptive commits on `main` |
 | 14 | Publish | Pending GitHub push with the developer's credentials |
+| 15 | Build certification dashboard | Three certificate images with titles, stats, and dashboard panel |
 
-**Total tasks recorded:** 28 — 2 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 29 — 3 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

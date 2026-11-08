@@ -7,6 +7,7 @@
     @include('partials.hero')
     @include('partials.about')
     @include('partials.education')
+    @include('partials.certifications')
     @include('partials.projects')
     @include('partials.github')
     @include('partials.contact')
