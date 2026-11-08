@@ -227,6 +227,13 @@
 
 ---
 
+### Task: Fix Vercel serving the site as a download
+
+* Prompt used: "[Screenshot 2026-11-08 185137.png] if i visit the site its directing download, not going to the website, fix it well"
+* Result/Output: Diagnosed the "download instead of website" symptom as the PHP file being served as a static download rather than executed — the community `vercel-php@0.7.4` runtime is outdated, and the `rewrites` routing lets `public/index.php` match the filesystem before the function runs. Upgraded `vercel.json` to the current `vercel-php@0.9.0` (PHP 8.5) runtime and switched from `rewrites` to legacy `routes` with filesystem handling: `/index.php` is forced to `api/index.php` before the filesystem check, real static files (`/build/*`, `/images/*`) are served from `public`, and everything else falls through to `api/index.php` which forwards to Laravel. Kept `outputDirectory: "public"`, added `"version": 2`, validated `vercel.json` parses, cleared compiled views, and verified `php artisan test` still passes (5 passed). Committed and pushed to `origin/main` for redeployment.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -276,5 +283,6 @@
 | 19 | Prepare for Vercel | Serverless entry point, vercel.json, health check, deploy docs |
 | 20 | Update phone number | Real number with tap-to-call links in About and Contact |
 | 21 | Fix Vercel build error | Set `outputDirectory` to `public` so deploy proceeds |
+| 22 | Fix Vercel download bug | Upgraded runtime and fixed routing so the site renders |
 
-**Total tasks recorded:** 35 — 9 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 36 — 10 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
