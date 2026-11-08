@@ -182,6 +182,9 @@ The contact number is intentionally left as `09XX XXX XXXX` because only a parti
 
 ```
 app/Http/Controllers/PortfolioController.php   Page controller
+api/index.php                                  Vercel serverless entry point
+vercel.json                                    Vercel build/runtime/deploy config
+.vercelignore                                  Vercel upload exclusions
 config/portfolio.php                           All portfolio content
 public/images/profile.jpg                      Profile photo (hero + About)
 public/images/profile.svg                      Fallback portrait placeholder
@@ -211,31 +214,73 @@ docs/                                          Word files for submission
 
 ---
 
-## Deployment
+## Deployment on Vercel
 
-Because the project has no database, it can be hosted on most free PHP platforms. A typical deployment flow:
+This project deploys to **Vercel** as a serverless PHP app using the community `vercel-php` runtime. It needs no database, queue worker, or scheduler, so it fits Vercel’s model. The setup is three files:
 
-1. Push the repository to GitHub.
-2. Create a new web service on a PHP host (Render, Railway, Fly.io, or a school server).
-3. Set the build command:
+- `api/index.php` — forwards every request to `public/index.php` and ensures `/tmp` cache directories exist
+- `vercel.json` — PHP runtime (`vercel-php@0.7.4`), build commands, catch-all rewrite, and production environment
+- `.vercelignore` — excludes `/vendor`, `/node_modules`, and `/.env` from the upload
+
+Vercel’s deployment filesystem is **read-only** and only `/tmp` is writable, so `vercel.json` points Laravel’s compiled views and bootstrap caches at `/tmp` (`VIEW_COMPILED_PATH`, `APP_CONFIG_CACHE`, `APP_EVENTS_CACHE`, `APP_PACKAGES_CACHE`, `APP_ROUTES_CACHE`, `APP_SERVICES_CACHE`) and switches to disk-free drivers (`CACHE_STORE=array`, `SESSION_DRIVER=cookie`) with logs to `stderr`. All portfolio images and files live in `public/`, so they are served as static files.
+
+### Deploy from GitHub (recommended)
+
+1. Push this repository to GitHub (public repo: `bataller_portfolio`).
+
+2. Go to the Vercel Dashboard and click **Add New → Project**, then import `davebataller/bataller_portfolio`.
+
+3. In **Build & Development Settings**, leave the framework as **Other** and keep the commands from `vercel.json`:
+
+   - Install Command: `npm ci`
+   - Build Command: `npm run build`
+
+   (The PHP runtime runs `composer install` itself — do **not** add `composer install` to the build command.)
+
+4. Add these **Environment Variables** (Production, Preview, Development):
+
+   | Name | Value | Notes |
+   | --- | --- | --- |
+   | --- | --- | --- |
+   | `APP_KEY` | `base64:...` | **Required secret.** Generate once locally with `php artisan key:generate --show` and paste it here. Never commit it to Git. |
+   | `APP_ENV` | `production` | Already in `vercel.json` |
+   | `APP_DEBUG` | `false` | Already in `vercel.json` |
+   | `APP_URL` | `https://your-project.vercel.app` | Optional. Update to your production domain after the first deploy. |
+   | `LOG_CHANNEL` | `stderr` | Already in `vercel.json` |
+   | `CACHE_STORE` | `array` | Already in `vercel.json` |
+   | `SESSION_DRIVER` | `cookie` | Already in `vercel.json` |
+   | `QUEUE_CONNECTION` | `sync` | Already in `vercel.json` |
+
+   Generate the key locally first:
    ```bash
-   composer install --no-dev --optimize-autoloader && npm ci && npm run build
+   php artisan key:generate --show
    ```
-4. Set the start command:
+
+5. Click **Deploy**. After the first deployment, update `APP_URL` to the assigned `*.vercel.app` domain and redeploy if needed.
+
+6. Smoke-test the deployment:
    ```bash
-   php artisan serve --host=0.0.0.0 --port=$PORT
+   curl https://your-project.vercel.app/health   # → {"status":"ok"}
+   curl https://your-project.vercel.app/up
+   curl -I https://your-project.vercel.app/images/profile.jpg
    ```
-5. Add environment variables:
-   ```
-   APP_ENV=production
-   APP_DEBUG=false
-   APP_KEY=<generated key>
-   APP_URL=https://your-app-url
-   SESSION_DRIVER=file
-   CACHE_STORE=file
-   QUEUE_CONNECTION=sync
-   ```
-6. Run `php artisan config:cache` and `php artisan route:cache` during the build if the host allows it.
+
+### Deploy with the Vercel CLI
+
+Alternatively, from the project root:
+
+```bash
+npm install -g vercel
+vercel env add APP_KEY      # paste the key from `php artisan key:generate --show`
+vercel --prod
+```
+
+### Important notes for serverless
+
+- **Runtime logs:** because `LOG_CHANNEL=stderr`, Laravel logs appear in **Vercel → Project → Logs**, not in a `laravel.log` file.
+- **No persistence:** `/tmp` is cleared on cold starts. That is fine here because the site is static and uses array cache / cookie sessions.
+- **Migrations:** not needed — this project is database-free.
+- **Do not run** `php artisan config:cache` or `php artisan route:cache` in the build command; Vercel provides env vars at runtime.
 
 > Update the **Live demo** link below once deployed.
 

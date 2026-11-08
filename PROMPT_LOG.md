@@ -206,6 +206,13 @@
 
 ---
 
+### Task: Fix all code required to deploy easily on Vercel
+
+* Prompt used: "fix all the code that is required to deploy easily in vercel"
+* Result/Output: Researched the Vercel PHP deployment options (official container path vs community serverless runtime) and implemented the serverless path that fits this database-free portfolio. Created `api/index.php` as the Vercel entry point that forwards to `public/index.php` and ensures `/tmp` storage directories exist, created `vercel.json` with the `vercel-php@0.7.4` runtime, `npm ci` / `npm run build` commands, a catch-all rewrite to `api/index.php`, and production env overrides (`APP_ENV=production`, `APP_DEBUG=false`, `LOG_CHANNEL=stderr`, `CACHE_STORE=array`, `SESSION_DRIVER=cookie`, `QUEUE_CONNECTION=sync`, plus `APP_*_CACHE` and `VIEW_COMPILED_PATH` pointing at `/tmp` for the read-only filesystem), created `.vercelignore` (`/vendor`, `/node_modules`, `/.env`), added a JSON `/health` route in `routes/web.php` alongside the built-in `/up` for smoke tests, documented the required Vercel environment variables (notably the secret `APP_KEY` generated with `php artisan key:generate --show`) in `.env.example` and `README.md`, and rewrote the README deployment section with step-by-step GitHub import and CLI instructions. Verified the app still passes `php artisan test` (5 passed) under both local and Vercel-style env (`CACHE_STORE=array`, `SESSION_DRIVER=cookie`, `LOG_CHANNEL=stderr`, `VIEW_COMPILED_PATH=/tmp`) and that `/`, `/dashboard`, `/health`, and `/up` all return 200 locally.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -216,7 +223,7 @@
 ### Task: Replace the profile photo
 
 * Prompt used: "Replace public/images/profile.svg with my real photo, keep the rounded card treatment, and update the alt text."
-* Result/Output: Pending — a real photo has not been supplied yet.
+* Result/Output: Completed — see "Set the profile photo in About and hero" above. The real photo is now at `public/images/profile.jpg` with `profile_image` / `profile_alt` in `config/portfolio.php`. The SVG remains as a fallback.
 
 ### Task: Update the contact number
 
@@ -226,7 +233,7 @@
 ### Task: Deploy the portfolio
 
 * Prompt used: "Prepare this Laravel portfolio for deployment on a free PHP host. Give me the build and start commands, the environment variables, and the steps to set APP_URL and generate a production key."
-* Result/Output: Pending — deployment steps are documented in the README, but no live URL has been created yet.
+* Result/Output: Completed for Vercel — see "Fix all code required to deploy easily on Vercel" above and the "Deployment on Vercel" section in `README.md`. No live URL has been created yet; push to GitHub and import the repository on Vercel to go live.
 
 ---
 
@@ -252,5 +259,6 @@
 | 16 | Publish first project | QR Code Based Event Attendance with two screenshots |
 | 17 | Complete certifications | Full-image display, details, filters, tests, navigation fix |
 | 18 | Set profile photo | Real photo in About profile card and hero |
+| 19 | Prepare for Vercel | Serverless entry point, vercel.json, health check, deploy docs |
 
-**Total tasks recorded:** 32 — 6 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 33 — 7 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
