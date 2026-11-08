@@ -199,6 +199,13 @@
 
 ---
 
+### Task: Set the profile photo in About and hero
+
+* Prompt used: "c:\Users\xlaur\Downloads\c20180dc-3f3d-4d55-a22b-8791487b65fd.jpg put this as the profile in about"
+* Result/Output: Copied the photo to `public/images/profile.jpg` (976×1100), added `profile_image` and `profile_alt` to `config/portfolio.php`, updated `partials/hero.blade.php` to render the real photo in a 4:5 frame with `fetchpriority="high"`, and added a profile card at the top of `partials/about.blade.php` showing the photo with name, role, school, year level, and availability, with a full-size link. The placeholder `profile.svg` remains as a config fallback. Rebuilt the assets and verified at 1440, 1024, 768, 390, and 320 pixels that both hero and About images load, there is no horizontal overflow, and there are no console or page errors.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -244,5 +251,6 @@
 | 15 | Build certification dashboard | Three certificate images with titles, stats, and dashboard panel |
 | 16 | Publish first project | QR Code Based Event Attendance with two screenshots |
 | 17 | Complete certifications | Full-image display, details, filters, tests, navigation fix |
+| 18 | Set profile photo | Real photo in About profile card and hero |
 
-**Total tasks recorded:** 31 — 5 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 32 — 6 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

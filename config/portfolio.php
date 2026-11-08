@@ -15,6 +15,8 @@ return [
     'name' => 'Janray Dave T. Bataller',
     'first_name' => 'Janray',
     'initials' => 'JB',
+    'profile_image' => 'images/profile.jpg',
+    'profile_alt' => 'Portrait of Janray Dave T. Bataller, BSIT student at Data Center College of Bangued – Abra',
     'role' => 'BS Information Technology Student',
     'tagline' => 'I build clean, practical web experiences.',
     'availability' => 'Open to internships and opportunities',

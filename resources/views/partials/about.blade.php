@@ -46,6 +46,27 @@
             </div>
 
             <div class="grid grid-cols-1 content-start gap-4 sm:grid-cols-2">
+                <div data-reveal style="--reveal-delay: 30ms" class="glass-panel card-hover overflow-hidden rounded-2xl sm:col-span-2">
+                    <div class="flex flex-col gap-5 p-5 sm:flex-row sm:items-center">
+                        <a href="{{ asset(config('portfolio.profile_image', 'images/profile.svg')) }}" target="_blank" rel="noopener noreferrer"
+                           class="relative mx-auto block h-28 w-28 shrink-0 overflow-hidden rounded-2xl border border-white/12 bg-ink-950 shadow-lg shadow-black/30 sm:mx-0"
+                           aria-label="Open full-size profile photo">
+                            <img src="{{ asset(config('portfolio.profile_image', 'images/profile.svg')) }}" alt="{{ config('portfolio.profile_alt', 'Portrait of ' . config('portfolio.name')) }}"
+                                 class="h-full w-full object-cover object-top" width="976" height="1100" loading="lazy" decoding="async">
+                        </a>
+                        <div class="min-w-0 flex-1 text-center sm:text-left">
+                            <p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-mint-300/80">Profile</p>
+                            <p class="mt-1 font-display text-lg font-semibold leading-tight text-white">{{ config('portfolio.name') }}</p>
+                            <p class="mt-1 text-xs leading-relaxed text-slate-400">{{ config('portfolio.role') }}</p>
+                            <p class="mt-0.5 text-xs text-slate-500">{{ config('portfolio.school') }} &middot; {{ config('portfolio.year_level') }}</p>
+                            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full border border-mint-300/20 bg-mint-300/[0.07] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-mint-200">
+                                <span class="h-1.5 w-1.5 rounded-full bg-mint-300"></span>
+                                {{ config('portfolio.availability') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
                 <div data-reveal style="--reveal-delay: 60ms" class="glass-panel card-hover rounded-2xl p-5 sm:col-span-2">
                     <div class="flex items-start gap-4">
                         <span class="icon-box shrink-0"><x-icon name="mail" class="h-5 w-5" /></span>

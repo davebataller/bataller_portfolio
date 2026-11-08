@@ -93,7 +93,7 @@ For development, `php artisan serve` is still recommended because it handles ass
 
 All personal content lives in **`config/portfolio.php`**:
 
-- `name`, `initials`, `role`, `tagline`
+- `name`, `initials`, `profile_image`, `profile_alt`, `role`, `tagline`
 - `email`, `phone`, `location`
 - `school`, `course`, `year_level`
 - `bio`, `stats`, `skills`, `learning`
@@ -163,9 +163,9 @@ Copy the certificate image into `public/images/certificates/`, then add an array
 
 The certification dashboard statistics, cards, and the `/dashboard` certifications panel all read from this array. `orientation` (`portrait`/`landscape`) is informational — cards always show the full image without cropping using a contained image over a blurred backdrop. Optional `credential_id` and `verify_url` lines appear only when set. Use the All / Completions / Participations pills on the page to filter the cards without reloading.
 
-### Replacing the profile image
+### Profile photo
 
-The current portrait is a generated SVG placeholder at `public/images/profile.svg`. Replace it with a real photo and update the `src` in `resources/views/partials/hero.blade.php` (or keep the filename).
+The portrait at `public/images/profile.jpg` is used in both the hero card and the About profile card. Replace that file with a new photo (any portrait image) or change `profile_image` and `profile_alt` in `config/portfolio.php` to point to a different file. The hero uses a 4:5 frame with `object-cover`, so faces should stay near the top of the image.
 
 ### Phone number
 
@@ -183,7 +183,8 @@ The contact number is intentionally left as `09XX XXX XXXX` because only a parti
 ```
 app/Http/Controllers/PortfolioController.php   Page controller
 config/portfolio.php                           All portfolio content
-public/images/profile.svg                      Portrait placeholder
+public/images/profile.jpg                      Profile photo (hero + About)
+public/images/profile.svg                      Fallback portrait placeholder
 public/images/certificates/                    Certificate images
 public/images/projects/                        Project screenshots
 public/favicon.svg                             Favicon

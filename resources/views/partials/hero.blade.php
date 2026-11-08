@@ -53,8 +53,8 @@
 
             <div class="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-2.5 shadow-2xl shadow-black/40 backdrop-blur-sm">
                 <div class="overflow-hidden rounded-[1.55rem] border border-white/10 bg-ink-900">
-                    <img src="{{ asset('images/profile.svg') }}" alt="Portrait of {{ config('portfolio.name') }}"
-                         class="aspect-square w-full object-cover" width="640" height="640">
+                    <img src="{{ asset(config('portfolio.profile_image', 'images/profile.svg')) }}" alt="{{ config('portfolio.profile_alt', 'Portrait of ' . config('portfolio.name')) }}"
+                         class="aspect-[4/5] w-full object-cover object-top" width="976" height="1100" fetchpriority="high">
                 </div>
 
                 <div class="flex items-center justify-between gap-3 px-3 py-3">
