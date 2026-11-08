@@ -234,6 +234,13 @@
 
 ---
 
+### Task: Fix the Vercel 500 server error
+
+* Prompt used: "now its 500 error screen, fix all the codes well so that i can deploy"
+* Result/Output: Inspected the build log the developer pasted — Vite built successfully and the PHP function packaged and deployed, so the 500 happens at runtime (missing `APP_KEY` is the classic cause on Laravel). Hardened `api/index.php` so the site renders even when `APP_KEY` was not set in the Vercel dashboard: if no key is present it generates an ephemeral per-instance key (safe here because the portfolio is stateless with no database or auth), while a dashboard-set key is still used as-is. Also derives `APP_URL` from Vercel's injected `VERCEL_URL` when unset. Verified `php -l` is clean and `php artisan test` still passes (5 passed). Committed and pushed to `origin/main` for redeployment.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -284,5 +291,6 @@
 | 20 | Update phone number | Real number with tap-to-call links in About and Contact |
 | 21 | Fix Vercel build error | Set `outputDirectory` to `public` so deploy proceeds |
 | 22 | Fix Vercel download bug | Upgraded runtime and fixed routing so the site renders |
+| 23 | Fix Vercel 500 error | Ephemeral `APP_KEY` fallback and `APP_URL` from `VERCEL_URL` |
 
-**Total tasks recorded:** 36 — 10 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 37 — 11 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

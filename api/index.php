@@ -24,4 +24,29 @@ foreach ([
     }
 }
 
+// Use Vercel's production URL as APP_URL when it is not set explicitly.
+// Vercel injects VERCEL_URL (e.g. "my-app.vercel.app") on every request.
+if (
+    empty($_ENV['APP_URL'] ?? null) &&
+    empty($_SERVER['APP_URL'] ?? null) &&
+    ! empty($_ENV['VERCEL_URL'] ?? ($_SERVER['VERCEL_URL'] ?? null))
+) {
+    $url = 'https://' . ($_ENV['VERCEL_URL'] ?? $_SERVER['VERCEL_URL']);
+    $_ENV['APP_URL'] = $url;
+    $_SERVER['APP_URL'] = $url;
+    putenv('APP_URL=' . $url);
+}
+
+// Ephemeral APP_KEY fallback so the site renders even if APP_KEY was not set
+// in the Vercel dashboard (Laravel throws MissingAppKeyException otherwise).
+// This portfolio is stateless — no database, auth, or encrypted payloads that
+// must survive restarts — so a per-instance key is safe here. When APP_KEY is
+// set in the dashboard it is used as-is and this fallback is skipped.
+if (empty($_ENV['APP_KEY'] ?? null) && empty($_SERVER['APP_KEY'] ?? null)) {
+    $key = 'base64:' . base64_encode(random_bytes(32));
+    $_ENV['APP_KEY'] = $key;
+    $_SERVER['APP_KEY'] = $key;
+    putenv('APP_KEY=' . $key);
+}
+
 require __DIR__ . '/../public/index.php';
