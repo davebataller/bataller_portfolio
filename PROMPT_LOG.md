@@ -221,4 +221,4 @@
 | 13 | Version control | Descriptive commits on `main` |
 | 14 | Publish | Pending GitHub push with the developer's credentials |
 
-**Total prompts recorded:** 2 developer prompts, 1 clarifying question, and 22 documented agent directives.
+**Total tasks recorded:** 28 — 2 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
