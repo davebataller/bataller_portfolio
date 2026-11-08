@@ -213,6 +213,13 @@
 
 ---
 
+### Task: Update the contact phone number
+
+* Prompt used: "0951 060 1537 this is the phone number, update and push in githun"
+* Result/Output: Updated `config/portfolio.php` to `phone => '0951 060 1537'` and `phone_link => '09510601537'`, so the About section renders a tap-to-call `tel:` link. Updated `partials/contact.blade.php` to make the number a tap-to-call link with a "Tap to call" note instead of the "Best reached by email for now" placeholder note. Updated the README phone section, cleared compiled views, verified the home page contains the new number and `tel:09510601537` link and returns 200, then committed and pushed to `origin/main`.
+
+---
+
 ## Follow-up prompts for future changes
 
 ### Task: Add a project
@@ -228,7 +235,7 @@
 ### Task: Update the contact number
 
 * Prompt used: "Change the phone number and phone_link in config/portfolio.php to my real number and remove the placeholder note from the contact section."
-* Result/Output: Pending — only the partial number "09" was supplied.
+* Result/Output: Completed — see "Update the contact phone number" above. The number is now `0951 060 1537` with `phone_link` `09510601537`, and the contact card is a tap-to-call link.
 
 ### Task: Deploy the portfolio
 
@@ -254,11 +261,12 @@
 | 11 | Test and repair | Responsive QA passed |
 | 12 | Document | README, prompt log, Word reports |
 | 13 | Version control | Descriptive commits on `main` |
-| 14 | Publish | Pending GitHub push with the developer's credentials |
+| 14 | Publish to GitHub | `main` pushed to `davebataller/bataller_portfolio` |
 | 15 | Build certification dashboard | Three certificate images with titles, stats, and dashboard panel |
 | 16 | Publish first project | QR Code Based Event Attendance with two screenshots |
 | 17 | Complete certifications | Full-image display, details, filters, tests, navigation fix |
 | 18 | Set profile photo | Real photo in About profile card and hero |
 | 19 | Prepare for Vercel | Serverless entry point, vercel.json, health check, deploy docs |
+| 20 | Update phone number | Real number with tap-to-call links in About and Contact |
 
-**Total tasks recorded:** 33 — 7 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.
+**Total tasks recorded:** 34 — 8 developer prompts, 1 clarifying question, 22 implementation directives, and 4 follow-up prompts. The clarifying question and the developer's answer are recorded together as one task.

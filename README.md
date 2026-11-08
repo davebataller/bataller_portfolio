@@ -169,11 +169,11 @@ The portrait at `public/images/profile.jpg` is used in both the hero card and th
 
 ### Phone number
 
-The contact number is intentionally left as `09XX XXX XXXX` because only a partial number was provided. Update `phone` and set `phone_link` to the same number in `config/portfolio.php` to enable a tap-to-call link:
+The contact number is `0951 060 1537` (`phone_link` `09510601537`) in `config/portfolio.php`, so the About and Contact sections render a tap-to-call `tel:` link. To change it, update both keys:
 
 ```php
-'phone' => '09171234567',
-'phone_link' => '09171234567',
+'phone' => '0951 060 1537',
+'phone_link' => '09510601537',
 ```
 
 ---

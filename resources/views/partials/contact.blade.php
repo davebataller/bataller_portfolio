@@ -46,8 +46,13 @@
 
                     <div class="glass-panel rounded-2xl p-4">
                         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">Phone</p>
-                        <p class="mt-2 text-sm font-medium text-slate-200">{{ config('portfolio.phone') }}</p>
-                        <p class="mt-1 text-[0.68rem] text-slate-500">Best reached by email for now.</p>
+                        @if (config('portfolio.phone_link'))
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', config('portfolio.phone_link')) }}" class="mt-2 block text-sm font-medium text-slate-200 transition hover:text-mint-200">{{ config('portfolio.phone') }}</a>
+                            <p class="mt-1 text-[0.68rem] text-slate-500">Tap to call</p>
+                        @else
+                            <p class="mt-2 text-sm font-medium text-slate-200">{{ config('portfolio.phone') }}</p>
+                            <p class="mt-1 text-[0.68rem] text-slate-500">Best reached by email for now.</p>
+                        @endif
                     </div>
 
                     <div class="glass-panel rounded-2xl p-4">

@@ -23,10 +23,8 @@ return [
     'location' => 'Bangued, Abra, Philippines',
 
     'email' => 'davebataller20@gmail.com',
-    'phone' => '09XX XXX XXXX',
-    // Set this to a real number (for example '09171234567') to turn the phone
-    // text into a tap-to-call link. Leave null while the number is a placeholder.
-    'phone_link' => null,
+    'phone' => '0951 060 1537',
+    'phone_link' => '09510601537',
 
     'school' => 'Data Center College of Bangued – Abra',
     'school_short' => 'DCC Bangued',
